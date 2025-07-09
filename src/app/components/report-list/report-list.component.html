@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>TV Interference Reports</h2>
+    <button class="btn btn-primary" routerLink="/report/new">
+      <i class="bi bi-plus-lg me-2"></i>New Report
+    </button>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <div class="text-center my-5" *ngIf="loading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!loading && !error">
+    <div class="col-12" *ngIf="reports.length === 0">
+      <div class="alert alert-info">
+        No interference reports found. Click "New Report" to submit one.
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4" *ngFor="let report of reports">
+      <div class="card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Report #{{ report.id }}</h5>
+          <span [class]="getStatusClass(report.status)">{{ report.status | titlecase }}</span>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <strong>Reporter:</strong> {{ report.reporterName }}
+          </div>
+          <div class="mb-3">
+            <strong>Channel Affected:</strong> {{ report.channelAffected }}
+          </div>
+          <div class="mb-3">
+            <strong>Type:</strong> {{ report.interferenceType }}
+          </div>
+          <div class="mb-3">
+            <strong>Time Observed:</strong> {{ formatDate(report.timeObserved) }}
+          </div>
+          <div class="mb-3">
+            <strong>Description:</strong>
+            <p class="mt-2">{{ report.description }}</p>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          <small>Reported: {{ formatDate(report.createdAt) }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

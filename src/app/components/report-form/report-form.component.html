@@ -1,0 +1,143 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Report TV Interference</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="reporterName" class="form-label">Your Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="reporterName"
+              formControlName="reporterName"
+              [class.is-invalid]="reportForm.get('reporterName')?.invalid && reportForm.get('reporterName')?.touched"
+            >
+            <div class="invalid-feedback" *ngIf="reportForm.get('reporterName')?.invalid && reportForm.get('reporterName')?.touched">
+              Name is required
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              [class.is-invalid]="reportForm.get('email')?.invalid && reportForm.get('email')?.touched"
+            >
+            <div class="invalid-feedback" *ngIf="reportForm.get('email')?.invalid && reportForm.get('email')?.touched">
+              Please enter a valid email address
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="phoneNumber"
+              formControlName="phoneNumber"
+              [class.is-invalid]="reportForm.get('phoneNumber')?.invalid && reportForm.get('phoneNumber')?.touched"
+            >
+            <div class="invalid-feedback" *ngIf="reportForm.get('phoneNumber')?.invalid && reportForm.get('phoneNumber')?.touched">
+              Please enter a valid phone number
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              formControlName="address"
+              [class.is-invalid]="reportForm.get('address')?.invalid && reportForm.get('address')?.touched"
+            >
+            <div class="invalid-feedback" *ngIf="reportForm.get('address')?.invalid && reportForm.get('address')?.touched">
+              Address is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="channelAffected" class="form-label">Affected Channel</label>
+            <input
+              type="text"
+              class="form-control"
+              id="channelAffected"
+              formControlName="channelAffected"
+              [class.is-invalid]="reportForm.get('channelAffected')?.invalid && reportForm.get('channelAffected')?.touched"
+            >
+            <div class="invalid-feedback" *ngIf="reportForm.get('channelAffected')?.invalid && reportForm.get('channelAffected')?.touched">
+              Channel information is required
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="interferenceType" class="form-label">Type of Interference</label>
+            <select
+              class="form-select"
+              id="interferenceType"
+              formControlName="interferenceType"
+              [class.is-invalid]="reportForm.get('interferenceType')?.invalid && reportForm.get('interferenceType')?.touched"
+            >
+              <option value="">Select interference type</option>
+              <option *ngFor="let type of interferenceTypes" [value]="type">
+                {{type}}
+              </option>
+            </select>
+            <div class="invalid-feedback" *ngIf="reportForm.get('interferenceType')?.invalid && reportForm.get('interferenceType')?.touched">
+              Please select an interference type
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="timeObserved" class="form-label">When did you notice the interference?</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="timeObserved"
+            formControlName="timeObserved"
+            [class.is-invalid]="reportForm.get('timeObserved')?.invalid && reportForm.get('timeObserved')?.touched"
+          >
+          <div class="invalid-feedback" *ngIf="reportForm.get('timeObserved')?.invalid && reportForm.get('timeObserved')?.touched">
+            Please specify when you observed the interference
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description of the Problem</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="4"
+            formControlName="description"
+            [class.is-invalid]="reportForm.get('description')?.invalid && reportForm.get('description')?.touched"
+          ></textarea>
+          <div class="invalid-feedback" *ngIf="reportForm.get('description')?.invalid && reportForm.get('description')?.touched">
+            Please provide a detailed description (minimum 10 characters)
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="reportForm.invalid || isSubmitting"
+          >
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" *ngIf="isSubmitting"></span>
+            Submit Report
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 
